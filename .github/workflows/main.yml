@@ -29,12 +29,12 @@ jobs:
        - name: cloning repo 
          continue-on-error: true 
          run: | 
-           git clone -b For-Git-WF https://${{ secrets.GH_TOKEN }}@github.com/Hijikita-san/octo-bass
+           git clone -b main https://${{ secrets.GH_TOKEN }}@github.com/Hijikita-san/Renamer-Bot-1
        - name: Running Emily Bot  
-         timeout-minutes: 350 
+         timeout-minutes: 300 
          continue-on-error: true 
          run: | 
-           cd octo-bass
+           cd Renamer-Bot-1
            docker build -t compressor . && docker run compressor 
             
        - name: Loop workflow 
@@ -45,4 +45,4 @@ jobs:
            echo $(( RANDOM - ( RANDOM % RANDOM ) )) > looper.txt 
            git add looper.txt 
            git commit -m "Workflow : Loop at $(date -u +%D-%T%P)" 
-           git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:For-Git-WF
+           git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
