@@ -1,4 +1,4 @@
-name: Emily Workflows  
+name: Doom Workflows  
  
 on: 
     push: 
@@ -29,12 +29,12 @@ jobs:
        - name: cloning repo 
          continue-on-error: true 
          run: | 
-           git clone -b main https://${{ secrets.GH_TOKEN }}@github.com/Hijikita-san/friendly-winner
-       - name: Running Emily Bot  
+           git clone -b main https://${{ secrets.GH_TOKEN }}@github.com/Hijikita-san/ubiquitous-meme
+       - name: Running Doom Bot  
          timeout-minutes: 300 
          continue-on-error: true 
          run: | 
-           cd friendly-winner
+           cd ubiquitous-meme
            docker build -t compressor . && docker run compressor 
             
        - name: Loop workflow 
