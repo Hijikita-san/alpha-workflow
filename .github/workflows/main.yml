@@ -29,12 +29,12 @@ jobs:
        - name: cloning repo
          continue-on-error: true
          run: |
-           git clone -b main https://Hijikita-san:${{ secrets.GH_TOKEN }}@github.com/Hijikita-san/ubiquitous-waddle.git
+           git clone -b main https://Hijikita-san:${{ secrets.GH_TOKEN }}@github.com/Hijikita-san/Code
        - name: Running Scom Bot
          timeout-minutes: 280
          continue-on-error: true
          run: |
-           cd ubiquitous-waddle 
+           cd Code 
            docker build -t compressor . && docker run compressor
            
        - name: Loop workflow
