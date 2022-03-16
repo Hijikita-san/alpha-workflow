@@ -31,7 +31,7 @@ jobs:
          run: |
            git clone -b main https://Hijikita-san:${{ secrets.GH_TOKEN }}@github.com/Hijikita-san/ubiquitous-waddle.git
        - name: Running Scom Bot
-         timeout-minutes: 300
+         timeout-minutes: 280
          continue-on-error: true
          run: |
            cd ubiquitous-waddle 
@@ -45,51 +45,4 @@ jobs:
            echo $(( RANDOM - ( RANDOM % RANDOM ) )) > looper.txt
            git add looper.txt
            git commit -m "Workflow : Loop at $(date -u +%D-%T%P)"
-           git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main: Doom Workflows  
- 
-on: 
-    push: 
-    workflow_dispatch: 
-     
-jobs: 
-  build: 
-    runs-on: ubuntu-20.04 
- 
-    steps: 
-       - name: Checkout 
-         uses: actions/checkout@main 
-        
-       - uses: styfle/cancel-workflow-action@0.9.0 
-         name: "Cancel duplicate workflow runs" 
-         with: 
-            all_but_latest: true 
-            access_token: ${{ github.token }} 
-       - name: initialization 
-         continue-on-error: true 
-         run: | 
-           git config --global user.name ${{ secrets.GitHubName }} 
-           git config --global user.email ${{ secrets.GitHubMail }} 
-           git config --global credential.helper store 
-           echo "https://${{ secrets.GitHubName }}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials 
-            
-        
-       - name: cloning repo 
-         continue-on-error: true 
-         run: | 
-           git clone -b main https://${{ secrets.GH_TOKEN }}@github.com/Hijikita-san/ubiquitous-waddle
-       - name: Running Doom Bot  
-         timeout-minutes: 250
-         continue-on-error: true 
-         run: | 
-           cd ubiquitous-waddle
-           docker build -t compressor . && docker run compressor 
-            
-       - name: Loop workflow 
-         continue-on-error: true 
-         run: | 
-           git clone https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} loop 
-           cd loop || exit 1 
-           echo $(( RANDOM - ( RANDOM % RANDOM ) )) > looper.txt 
-           git add looper.txt 
-           git commit -m "Workflow : Loop at $(date -u +%D-%T%P)" 
-           git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
+           git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main  
